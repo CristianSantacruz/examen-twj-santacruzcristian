@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CelularComponent } from './celular/celular.component';
 import { AplicacionComponent } from './aplicacion/aplicacion.component';
+import {routing} from "./app.routes";
+import {MasterUrlService} from "./services/master-url.service";
 
 @NgModule({
   declarations: [
@@ -18,9 +20,12 @@ import { AplicacionComponent } from './aplicacion/aplicacion.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    routing
   ],
-  providers: [],
+  providers: [
+    MasterUrlService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

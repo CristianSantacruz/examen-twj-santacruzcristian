@@ -45,7 +45,7 @@
         </div>
 
         <button [disabled]="disabledButtons.NuevoCelularFormSubmitButton||!NuevoCelularForm.valid" type="submit"
-                class="btn btn-block btn-success">Crear Celular
+                class="btn btn-block btn-primary">Crear Celular
         </button>
       </form>
     </div>
@@ -58,22 +58,20 @@
       </div>
 
       <div  class="row animated flipInY" >
-        <div class="col-sm-5" >
+        <div class="col-sm-3" >
           <button class="btn btn-block btn-info"
                   (click)="disabledButtons.Oculto = false; celular.formularioCerrado = !celular.formularioCerrado"
           >Actualizar</button>
         </div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-5">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-3">
           <button class="btn btn-block btn-danger" (click)="borrarCelular(celular.id)">Borrar</button>
         </div>
-        <div class="row">
-          <div class="col-sm-4"></div>
+          <div class="col-sm-1"></div>
           <div class="col-sm-4">
-            <button class="btn btn-block btn-success" [routerLink]="[celular.id,'aplicacion']">Ir a Aplicaciones</button>
+            <button class="btn btn-block btn-success" [routerLink]="[celular.id,'aplicacion']">Ver Aplicaciones</button>
           </div>
         </div>
-      </div>
       <div class="div" [hidden]="celular.formularioCerrado || (disabledButtons.Oculto)">
         <form action="">
           <form class="animated bounceIn" (ngSubmit)="actualizarCelular(celular)" #NuevoCelularForm="ngForm">
@@ -107,14 +105,22 @@
                      #nombre="ngModel"
                      #nombreElm>
             </div>
-            <button [disabled]="disabledButtons.NuevoCelularFormSubmitButton||!NuevoCelularForm.valid" type="submit"
-                    class="btn btn-block btn-success">Actualizar
-            </button>
-            <button type="button"
-                    class="btn btn-block btn-warning"
-                    (click)="celular.formularioCerrado = !celular.formularioCerrado"
-            >Cancelar
-            </button>
+
+            <div class="col-sm-4">
+              <button [disabled]="disabledButtons.NuevoCelularFormSubmitButton||!NuevoCelularForm.valid" type="submit"
+                      class="btn btn-block btn-success">Actualizar
+              </button>
+            </div>
+
+            <div class="col-sm-3"></div>
+
+            <div class="col-sm-4">
+              <button type="button"
+                      class="btn btn-block btn-warning"
+                      (click)="celular.formularioCerrado = !celular.formularioCerrado"
+              >Cancelar
+              </button>
+            </div>
           </form>
         </form>
       </div>

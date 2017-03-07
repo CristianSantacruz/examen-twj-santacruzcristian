@@ -1,4 +1,4 @@
-<h1 align="center">{{title}} del Celular{{this._parametros.idCelular}}</h1>
+<h1 align="center">{{title}}</h1>
 <div class="container">
   <div class="row">
     <div class="col-sm-5">
@@ -43,7 +43,7 @@
         </div>
 
         <button [disabled]="disabledButtons.NuevaAplicacionFormSubmitButton||!NuevaAplicacionForm.valid"
-                class="btn btn-block btn-success" type="submit">Crear Aplicacion
+                class="btn btn-block btn-primary" type="submit">Crear Aplicacion
         </button>
       </form>
     </div>
@@ -100,14 +100,22 @@
                      #nombre="ngModel"
                      #nombreElm>
             </div>
-            <button [disabled]="disabledButtons.NuevaAplicacionFormSubmitButton||!NuevaAplicacionForm.valid" type="submit"
-                    class="btn btn-block btn-success">Actualizar
-            </button>
-            <button type="button"
-                    class="btn btn-block btn-warning"
-                    (click)="aplicacion.formularioCerrado = !aplicacion.formularioCerrado"
-            >Cancelar
-            </button>
+
+            <div class="col-sm-4">
+              <button [disabled]="disabledButtons.NuevaAplicacionFormSubmitButton||!NuevaAplicacionForm.valid" type="submit"
+                      class="btn btn-block btn-success">Actualizar
+              </button>
+            </div>
+
+            <div class="col-sm-3"></div>
+
+            <div class="col-sm-3">
+              <button type="button"
+                      class="btn btn-block btn-warning"
+                      (click)="aplicacion.formularioCerrado = !aplicacion.formularioCerrado"
+              >Cancelar
+              </button>
+            </div>
           </form>
         </form>
       </div>

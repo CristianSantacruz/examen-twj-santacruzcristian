@@ -12,7 +12,7 @@ import {NgForm} from "@angular/forms";
 })
 export class AplicacionComponent implements OnInit {
   private _parametros: any;
-  title: string = "Bienvenido a Aplicacion";
+  title: string = "Bienvenido a Aplicaciones";
   nuevaAplicacion= {};
   aplicaciones=[];
   disabledButtons = {

@@ -32,13 +32,13 @@
         <option value="$PROJECT_DIR$/Backend/config/routes.js" />
         <option value="$PROJECT_DIR$/Frontend/src/app/app.routes.ts" />
         <option value="$PROJECT_DIR$/Frontend/src/app/app.component.html" />
-        <option value="$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.ts" />
-        <option value="$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.html" />
         <option value="$PROJECT_DIR$/Backend/config/models.js" />
         <option value="$PROJECT_DIR$/Frontend/src/app/home/home.component.html" />
         <option value="$PROJECT_DIR$/Frontend/src/app/services/master-url.service.ts" />
         <option value="$PROJECT_DIR$/Frontend/src/app/celular/celular.component.ts" />
         <option value="$PROJECT_DIR$/Frontend/src/app/celular/celular.component.html" />
+        <option value="$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.ts" />
+        <option value="$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.html" />
       </list>
     </option>
   </component>
@@ -161,7 +161,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="celular" />
+              <option name="myItemId" value="aplicacion" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -248,12 +248,12 @@
       <option name="presentableId" value="Default" />
       <updated>1488810556762</updated>
       <workItem from="1488810562132" duration="3949000" />
-      <workItem from="1488850277977" duration="15128000" />
+      <workItem from="1488850277977" duration="16578000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19077000" />
+    <option name="totallyTimeSpent" value="20527000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1370" height="744" extended-state="0" />
@@ -417,31 +417,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="99" column="0" lean-forward="true" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-          <folding>
-            <element signature="e#261#384#0" expanded="false" />
-            <element signature="n#!!block;n#ngOnInit#0;n#AplicacionComponent#0" expanded="false" />
-            <element signature="n#!!block;n#crearAplicacion#0;n#AplicacionComponent#0" expanded="false" />
-            <element signature="n#!!block;n#borrarAplicacion#0;n#AplicacionComponent#0" expanded="false" />
-            <element signature="n#!!block;n#actualizarAplicacion#0;n#AplicacionComponent#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="144" column="6" lean-forward="false" selection-start-line="144" selection-start-column="6" selection-end-line="144" selection-end-column="6" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Frontend/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -543,6 +518,33 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#73#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="98" column="1" lean-forward="true" selection-start-line="98" selection-start-column="1" selection-end-line="98" selection-end-column="1" />
+          <folding>
+            <element signature="e#261#384#0" expanded="false" />
+            <element signature="e#576#644#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#AplicacionComponent#0" expanded="false" />
+            <element signature="n#!!block;n#crearAplicacion#0;n#AplicacionComponent#0" expanded="false" />
+            <element signature="n#!!block;n#borrarAplicacion#0;n#AplicacionComponent#0" expanded="false" />
+            <element signature="n#!!block;n#actualizarAplicacion#0;n#AplicacionComponent#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="117" column="0" lean-forward="true" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+          <folding>
+            <element signature="n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>

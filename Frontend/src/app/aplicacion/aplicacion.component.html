@@ -1,145 +1,117 @@
+<h1 align="center">{{title}} del Celular{{this._parametros.idCelular}}</h1>
 <div class="container">
-  <h1 class="text-center text-info">Bienvenidos a Ingresar Aplicaciones</h1>
   <div class="row">
-    <div class="col-sm-12">
-      <label>Vista Preliminar</label>
-      <pre class="animated fadeInUp">
-        {{nuevaAplicacion|json}}
-      </pre>
-    </div>
-    <div class="col-sm-6">
+    <div class="col-sm-5">
       <form class="animated bounceIn" (ngSubmit)="crearAplicacion(NuevaAplicacionForm)" #NuevaAplicacionForm="ngForm">
         <div class="form-group">
-          <label>Nombre de la Aplicación</label>
-          <div *ngIf="nombre.errors">
-            <span class="text-info" *ngIf="nombre.errors.required">Campo requerido</span>
-            <span class="text-info" *ngIf="nombre.errors.minlength">Minimo 5 caracteres</span>
-          </div>
-          <input type="text"
+          <label>Aplicacion</label>
+          <input required
+                 minlength="4"
+                 type="text"
                  class="form-control"
-                 minlength="5"
-                 required
-                 placeholder="Ingrese el nombre de la aplicación"
+                 placeholder="Ingrese el nombre de la aplicacion"
                  name="nombre"
                  [(ngModel)]="nuevaAplicacion.nombre"
-                 #nombre="ngModel">
+                 #nombre="ngModel"
+                 #nombreElm>
         </div>
+
         <div class="form-group">
           <label>Version</label>
-          <div *ngIf="version.errors">
-            <span class="text-info" *ngIf="version.errors.required">Campo requerido</span>
-          </div>
-          <input type="integer"
+          <input required
+                 min="1"
+                 type="number"
                  class="form-control"
-                 name="version"
-                 required
-                 [(ngModel)]="nuevaAplicacion.version"
-                 #fichadoHasta="ngModel">
+                 placeholder="Ingrese la versión de la aplicación"
+                 name="version2"
+                 [(ngModel)]="nuevaAplicacion.version2"
+                 #nombre="ngModel"
+                 #nombreElm>
         </div>
+
         <div class="form-group">
-          <label>Tamanio</label>
-          <div *ngIf="tamanio.errors">
-            <span class="text-info" *ngIf="tamanio.errors.required">Campo requerido</span>
-          </div>
-          <input type="integer"
+          <label>Tamaño</label>
+          <input required
+                 type="number"
+                 min = "1"
                  class="form-control"
-                 name="tamanio"
-                 required
                  placeholder="Ingrese el tamaño de la aplicación"
+                 name="tamanio"
                  [(ngModel)]="nuevaAplicacion.tamanio"
-                 #posicion="ngModel">
+                 #nombre="ngModel"
+                 #nombreElm>
         </div>
-        <button [disabled]="disabledButtons.NuevaAplicacionFormSubmitButton ||!NuevaAplicacionForm.valid" type="submit"
-                class="btn btn-block btn-success">Crear Aplicacion
+
+        <button [disabled]="disabledButtons.NuevaAplicacionFormSubmitButton||!NuevaAplicacionForm.valid"
+                class="btn btn-block btn-success" type="submit">Crear Aplicacion
         </button>
       </form>
     </div>
-    <div class="col-sm-6 text-center">
-      <h1 class="text-center text-info">{{nuevaAplicacion.nombre}}</h1>
-      <h3>{{nuevaAplicacion.version}}</h3>
-      <h3>{{nuevaAplicacion.tamanio}}</h3>
-    </div>
-  </div>
-  <br>
-  <div class="row ">
-    <div class="col-sm-12 animated fadeInLeft table-bordered" *ngFor="let aplicacion of aplicaciones">
-      <div class="col-sm-6">
-        <div class="text-center">
-          <h3 class="text-center text-info">{{aplicacion.nombre}}</h3>
-          <p>ID:{{aplicacion.id}}</p>
-          <p>Fichado hasta:{{aplicacion.version}}</p>
-          <p>Posición :{{aplicacion.tamanio}}</p>
+    <div class="col-sm-5 animated flipInX table-bordered ma-margen-top-bottom ma-padding-top-bottom" *ngFor="let aplicacion of aplicaciones">
+      <div class="text-center">
+        <h3>{{aplicacion.nombre}}</h3>
+        <p>Versión: {{aplicacion.version2}}</p>
+        <p>Tamaño: {{aplicacion.tamanio}} MB</p>
+      </div>
+      <div class="row animated flipInY" >
+        <div class="col-sm-5" >
+          <button class="btn btn-block btn-info"
+                  (click)="disabledButtons.Oculto = false; aplicacion.formularioCerrado = !aplicacion.formularioCerrado"
+          >Actualizar</button>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+          <button class="btn btn-block btn-danger" (click)="borrarAplicacion(aplicacion.id)">Borrar</button>
+        </div>
+        <div class="row">
+          <div class="col-sm-4"></div>
         </div>
       </div>
-      <div class="col-sm-6 ">
-        <div class="row animated fadeInRight" style="margin-top:50px" [hidden]="!aplicacion.formularioCerrado">
-          <div class="col-sm-5">
-            <button class="btn btn-block btn-info" (click)="aplicacion.formularioCerrado=!aplicacion.formularioCerrado">
-              Actualizar
+      <div class="div" [hidden]="aplicacion.formularioCerrado || (disabledButtons.Oculto)">
+        <form action="">
+          <form class="animated bounceIn" (ngSubmit)="actualizarAplicacion(aplicacion)" #NuevaAplicacionForm="ngForm">
+            <div  class="form-group">
+              <label>Aplicacion</label>
+              <input required
+                     minlength="4"
+                     type="text"
+                     class="form-control"
+                     placeholder="Ingrese el nombre de la aplicación"
+                     name="nombre"
+                     [(ngModel)]="aplicacion.nombre"
+                     #nombre="ngModel"
+                     #nombreElm>
+              <input required
+                     min="1"
+                     type="number"
+                     class="form-control"
+                     placeholder="Ingrese la versión de la aplicación"
+                     name="version2"
+                     [(ngModel)]="aplicacion.version2"
+                     #nombre="ngModel"
+                     #nombreElm>
+              <input required
+                     min="1"
+                     type="number"
+                     class="form-control"
+                     placeholder="Ingrese el tamaño de la aplicación"
+                     name="tamanio"
+                     [(ngModel)]="aplicacion.tamanio"
+                     #nombre="ngModel"
+                     #nombreElm>
+            </div>
+            <button [disabled]="disabledButtons.NuevaAplicacionFormSubmitButton||!NuevaAplicacionForm.valid" type="submit"
+                    class="btn btn-block btn-success">Actualizar
             </button>
-          </div>
-          <div class="col-sm-2"></div>
-          <div class="col-sm-5">
-            <button class="btn btn-block btn-danger" (click)="borrarAplicacion(aplicacion.id)">Borrar</button>
-          </div>
-        </div>
-        <div class="div" style="margin-top:10px; margin-bottom:20px;" [hidden]="aplicacion.formularioCerrado">
-          <form action="">
-            <form class="animated bounceIn" (ngSubmit)="actualizarAplicacion(aplicacion)" #NuevaAplicacionForm="ngForm">
-              <div class="form-group">
-                <label>Aplicacion</label>
-                <div *ngIf="nombre.errors">
-                  <span class="text-info" *ngIf="nombre.errors.required">Campo requerido</span>
-                  <span class="text-info" *ngIf="nombre.errors.minlength">Minimo 5 caracteres</span>
-                </div>
-                <input required
-                       minlength="5"
-                       type="text"
-                       class="form-control"
-                       placeholder="Ingrese el nombre de la aplicación"
-                       name="nombre"
-                       [(ngModel)]="aplicacion.nombre"
-                       #nombre="ngModel">
-              </div>
-              <div class="form-group">
-                <label>Versión</label>
-                <div *ngIf="version.errors">
-                  <span class="text-info" *ngIf="version.errors.required">Campo requerido</span>
-                </div>
-                <input required
-                       type="integer"
-                       class="form-control"
-                       name="version"
-                       [(ngModel)]="aplicacion.version"
-                       #fichadoHasta="ngModel"
-                >
-              </div>
-              <div class="form-group">
-                <label>Tamaño</label>
-                <div *ngIf="tamanio.errors">
-                  <span class="text-info" *ngIf="tamanio.errors.required">Campo requerido</span>
-                </div>
-                <input required
-                       type="integer"
-                       class="form-control"
-                       placeholder="Ingrese el tamño de la aplicación"
-                       name="tamanio"
-                       [(ngModel)]="aplicacion.tamanio"
-                       #posicion="ngModel"
-                >
-              </div>
-              <button [disabled]="disabledButtons.NuevaAplicacionFormSubmitButton ||!NuevaAplicacionForm.valid" type="submit"
-                      class="btn btn-block btn-success">Actualizar
-              </button>
-              <button type="button"
-                      class="btn btn-block btn-warning"
-                      (click)="aplicacion.formularioCerrado=!formularioCerrado">
-                Cancelar
-              </button>
-            </form>
+            <button type="button"
+                    class="btn btn-block btn-warning"
+                    (click)="aplicacion.formularioCerrado = !aplicacion.formularioCerrado"
+            >Cancelar
+            </button>
           </form>
-        </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
+

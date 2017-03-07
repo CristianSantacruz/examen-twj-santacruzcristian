@@ -10,14 +10,13 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./aplicacion.component.css']
 })
 export class AplicacionComponent implements OnInit {
-
-  title: string = "Bienvenidos a Ingresar Aplicaciones";
-  private _parametros;
-  aplicaciones = [];
-  nuevaAplicacion = {};
-  aplicacionAntigua = this.nuevaAplicacion;
+  private _parametros: any;
+  title: string = "Bienvenido a Aplicaciones";
+  nuevaAplicacion= {};
+  aplicaciones=[];
   disabledButtons = {
-  NuevaAplicacionFormSubmitButton: false
+    NuevaAplicacionFormSubmitButton: false,
+    Oculto : false
   };
 
   constructor(private _ActivatedRoute: ActivatedRoute,
@@ -29,16 +28,15 @@ export class AplicacionComponent implements OnInit {
       .params
       .subscribe(parametros => {
         this._parametros = parametros;
-        this._http.get(this._masterURL.url + 'Aplicacion?idCelular=' + this._parametros.idCelular)
+        this._http.get(this._masterURL.url+"Aplicacion?idCelular="+this._parametros.idCelular)
           .subscribe(
-            (res: Response) => {
-              this.aplicaciones = res.json()
-                .map((value) => {
-                  value.formularioCerrado = true;
-                  return value;
-                });
+            (res:Response)=> {
+              this.aplicaciones = res.json() .map((value) => {
+                value.formularioCerrado = true;
+                return value;
+              })
             },
-            (err) => {
+            (err)=>{
               console.log(err)
             }
           )
@@ -47,43 +45,45 @@ export class AplicacionComponent implements OnInit {
   crearAplicacion(formulario: NgForm) {
     console.log(formulario);
     this.disabledButtons.NuevaAplicacionFormSubmitButton = true;
-    let nuevitaAplicacion = {
+    this._http.post(this._masterURL.url + "Aplicacion", {
       nombre: formulario.value.nombre,
-      version: formulario.value.version,
+      version2: formulario.value.version2,
       tamanio: formulario.value.tamanio,
       idCelular: this._parametros.idCelular
-    };
-    this._http.post(this._masterURL.url + 'Aplicacion', nuevitaAplicacion)
-      .subscribe(
-        (res: Response) => {
-          this.aplicaciones.push(res.json());
-          this.nuevaAplicacion = {};
-          this.disabledButtons.NuevaAplicacionFormSubmitButton = false;
-        },
-        (err) => {
-          this.disabledButtons.NuevaAplicacionFormSubmitButton = false;
-          console.log(err)
-        }
-      );
+    }).subscribe(
+      (res) => {
+        console.log("No hubo errores");
+        console.log(res);
+        this.aplicaciones.push(res.json());
+        this.nuevaAplicacion = {};
+        this.disabledButtons.NuevaAplicacionFormSubmitButton = false;
+        this.disabledButtons.Oculto = true
+      },
+      (err) => {
+        this.disabledButtons.NuevaAplicacionFormSubmitButton = false;
+        console.log("Ocurrió un error", err);
+      },
+      () => {
+      }
+    );
   }
   borrarAplicacion(id: number) {
     this._http.delete(this._masterURL.url + "Aplicacion/" + id)
       .subscribe(
         (res) => {
           let aplicacionBorrada = res.json();
-          this.aplicaciones = this.aplicaciones.filter(value => aplicacionBorrada.id != value.id);
+          this.aplicaciones= this.aplicaciones.filter(value => aplicacionBorrada.id != value.id);
         },
         (err) => {
           console.log(err);
         }
-      );
+      )
   }
   actualizarAplicacion(aplicacion: any) {
     let parametos = {
       nombre: aplicacion.nombre,
-      version: aplicacion.version,
-      tamanio: aplicacion.tamanio,
-      idCelular: this._parametros.idCelular
+      version2: aplicacion.version2,
+      tamanio: aplicacion.tamanio
     };
     this._http.put(this._masterURL.url + "Aplicacion/" + aplicacion.id, parametos)
       .subscribe(

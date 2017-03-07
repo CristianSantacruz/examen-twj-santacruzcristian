@@ -9,7 +9,7 @@ export class MasterUrlService {
   get url(): string {
     return this._url;
   }
-  set url(value: string) {
-    this._url = value;
+  set url(nuevoUrl: string) {
+    this._url = nuevoUrl;
   }
 }

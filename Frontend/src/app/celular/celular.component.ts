@@ -9,79 +9,83 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./celular.component.css']
 })
 export class CelularComponent implements OnInit {
-  title: string = "Bienvenidos a Ingresar Celulares";
-  nuevoCelular: any = {};
-  Celulares = [];
-  disabledButtons={
-  NuevoCelularFormSubmitButton:false
+  title: string = "Bienvenido a Celulares";
+  nuevoCelular = {};
+  celulares= [];
+  disabledButtons = {
+  NuevoCelularFormSubmitButton: false,
+  Oculto : false
   };
 
   constructor(private _http: Http,
               private _masterURL:MasterUrlService) { }
 
   ngOnInit() {
-    this._http.get(this._masterURL.url+"Celular")
+    this.disabledButtons.Oculto = true;
+    this._http.get(this._masterURL.url + "Celular")
       .subscribe(
-        (res:Response)=>{
-          this.Celulares=res.json().map((value)=>{
-            value.formularioCerrado=true;
-            return value;
-          });
+        (res: Response) => {
+          this.celulares= res.json()
+            .map((value) => {
+              value.formularioCerrado = true;
+              return value;
+            });
         },
-        (err)=>{
-          console.log(err)
+        (err) => {
+          console.log(err);
         }
       )
   }
   crearCelular(formulario:NgForm) {
-    this.disabledButtons.NuevoCelularFormSubmitButton=true;
-    let nuevoCelular={
-      nombre:formulario.value.nombre,
-      sistemaOperativo:formulario.value.sistemaOperativo,
-      version:formulario.value.version
-    };
-    this._http.post(this._masterURL.url + "Celular", nuevoCelular)
-      .subscribe(
-        (res)=>{
-          console.log("Sin Errores");
-          console.log(res);
-          this.Celulares.push(res.json());
-          this.nuevoCelular={};
-          this.disabledButtons.NuevoCelularFormSubmitButton=false;
-        },
-        (err)=>{
-          this.disabledButtons.NuevoCelularFormSubmitButton=false;
-          console.log("Error",err);
-        },
-        ()=>{
-          console.log("Termino la función vamos a las casas");
-        }
-      );
+    console.log(formulario);
+    this.disabledButtons.NuevoCelularFormSubmitButton = true;
+    this._http.post(this._masterURL.url + "Celular", {
+      nombre: formulario.value.nombre,
+      sistemaOperativo: formulario.value.sistemaOperativo,
+      version1: formulario.value.version1
+    }).subscribe(
+      (res) => {
+        console.log("No hubo errores");
+        console.log(res);
+        this.celulares.push(res.json());
+        this.nuevoCelular = {};
+        this.disabledButtons.NuevoCelularFormSubmitButton = false;
+        this.disabledButtons.Oculto = true;
+      },
+      (err) => {
+        this.disabledButtons.NuevoCelularFormSubmitButton = false;
+        console.log("Ocurrió un error", err);
+      },
+      () => {
+      }
+    );
   }
   borrarCelular(id:number){
-    this._http.delete(this._masterURL.url+"Celular/" +id)
+    this._http.delete(this._masterURL.url + "Celular/" + id)
       .subscribe(
-        (res)=>{
-          let celularBorrado=res.json();
-          this.Celulares=this.Celulares.filter(value=>celularBorrado.id!=value.id)
+        (res) => {
+          let celularBorrado = res.json();
+          this.celulares = this.celulares.filter(value => celularBorrado.id != value.id);
         },
-        (err)=>{
+        (err) => {
           console.log(err);
         }
       )
   }
   actualizarCelular(celular:any){
-    let parametros = {
-      nombre:celular.nombre
+    let parametos = {
+      nombre: celular.nombre,
+      sistemaOperativo: celular.sistemaOperativo,
+      version1: celular.version1
     };
-    this._http.put(this._masterURL.url+"Celular/"+celular.id,parametros)
+    this._http.put(this._masterURL.url + "Celular/" + celular.id, parametos)
       .subscribe(
-        (res: Response)=>{
-          celular.formularioCerrado=!celular.formularioCerrado;
-          console.log("Respuesta", res.json());
+        (res: Response) => {
+          celular.formularioCerrado = !celular.formularioCerrado;
+          console.log("Respuesta:", res.json());
         },
-        (err)=>{
-          console.log("Error"+err);
+        (err) => {
+          console.log("Error:", err);
         }
       )
   }

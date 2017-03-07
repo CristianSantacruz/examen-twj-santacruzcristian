@@ -1,144 +1,122 @@
+<h1 align="center">{{title}}</h1>
+
 <div class="container">
-  <h1 class="text-center text-info">{{title}}</h1>
   <div class="row">
-    <div class="col-sm-12">
-      <pre class="animated fadeInUp">
-        {{ nuevoCelular | json}}
-      </pre>
-    </div>
-    <div class="col-sm-6">
+    <div class="col-sm-5">
       <form class="animated bounceIn" (ngSubmit)="crearCelular(NuevoCelularForm)" #NuevoCelularForm="ngForm">
         <div class="form-group">
           <label>Celular</label>
-          <div *ngIf="nombre.errors">
-            <span class="text-info" *ngIf="nombre.errors.required">Campo requerido</span>
-            <span class="text-info" *ngIf="nombre.errors.minlength">Mínimo 5 caracteres</span>
-          </div>
           <input required
-                 minlength="5"
+                 minlength="4"
                  type="text"
                  class="form-control"
                  placeholder="Ingrese el nombre del celular"
                  name="nombre"
                  [(ngModel)]="nuevoCelular.nombre"
                  #nombre="ngModel"
-          >
+                 #nombreElm>
         </div>
+
         <div class="form-group">
           <label>Sistema Operativo</label>
-          <div *ngIf="sistemaOperativo.errors">
-            <span class="text-info" *ngIf="sistemaOperativo.errors.required">Campo requerido</span>
-          </div>
-          <input type="text"
-                 required
+          <input required
+                 minlength="4"
+                 type="text"
+                 class="form-control"
+                 placeholder="Ingrese el Sistema Operativo"
                  name="sistemaOperativo"
-                 class="form-control"
                  [(ngModel)]="nuevoCelular.sistemaOperativo"
-                 #fechaCreacion="ngModel"
-          >
+                 #nombre="ngModel"
+                 #nombreElm>
         </div>
+
         <div class="form-group">
-          <label>Version</label>
-          <div *ngIf="version.errors">
-            <span class="text-info" *ngIf="version.errors.required">Campo requerido</span>
-          </div>
-          <input type="text"
-                 name="version"
-                 required
-                 placeholder="Ingrese la version del celular"
+          <label>Versión</label>
+
+          <input required
+                 type="number"
+                 min = "1"
                  class="form-control"
-                 [(ngModel)]="nuevoCelular.version"
-                 #paisResidencia="ngModel"
-          >
+                 placeholder="Ingrese la versión del celular"
+                 name="version1"
+                 [(ngModel)]="nuevoCelular.version1"
+                 #nombre="ngModel"
+                 #nombreElm>
         </div>
-        <button [disabled]="disabledButtons.NuevoCelularFormSubmitButton ||!NuevoCelularForm.valid" type="submit"
-                class="btn btn-block btn-success">Crear
+
+        <button [disabled]="disabledButtons.NuevoCelularFormSubmitButton||!NuevoCelularForm.valid" type="submit"
+                class="btn btn-block btn-success">Crear Celular
         </button>
       </form>
     </div>
-    <div class="col-sm-6 text-center">
-      <h1 class="text-info">{{nuevoCelular.nombre}}</h1>
-      <h1>{{nuevoCelular.sistemaOperativo}}</h1>
-      <h1>{{nuevoCelular.version}}</h1>
-    </div>
+    <div class="col-sm-5 animated flipInX table-bordered ma-margen-top-bottom ma-padding-top-bottom" *ngFor="let celular of celulares">
+      <div class="text-center">
+        <h3>{{celular.nombre}}</h3>
+        <h3>ID: {{celular.id}}</h3>
+        <p>Sistema Operativo: {{celular.sistemaOperativo}}</p>
+        <p>Versión: {{celular.version1}}</p>
+      </div>
 
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-sm-12 animated flipInX table-bordered" *ngFor="let celular of Celulares">
-      <div class="col-sm-6 " style="margin-top:2%">
-        <div class="text-center">
-          <h3>{{celular.nombre}}</h3>
-          <p>ID: {{celular.id}}</p>
-          <p>Sistema Operativo: {{celular.sistemaOperativo}}</p>
-          <p>Versión: {{celular.version}}</p>
+      <div  class="row animated flipInY" >
+        <div class="col-sm-5" >
+          <button class="btn btn-block btn-info"
+                  (click)="disabledButtons.Oculto = false; celular.formularioCerrado = !celular.formularioCerrado"
+          >Actualizar</button>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+          <button class="btn btn-block btn-danger" (click)="borrarCelular(celular.id)">Borrar</button>
+        </div>
+        <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+            <button class="btn btn-block btn-success" [routerLink]="[celular.id,'aplicacion']">Ir a Aplicaciones</button>
+          </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="row animated flipInY" style="margin-top:10%" [hidden]="!celular.formularioCerrado">
-          <div class="col-sm-5">
-            <button class="btn btn-block btn-info" (click)="celular.formularioCerrado=!celular.formularioCerrado">
-              Actualizar
-            </button>
-          </div>
-          <div class="col-sm-2"></div>
-          <div class="col-sm-5">
-            <button class="btn btn-block btn-danger" (click)="borrarCelular(celular.id)">Borrar</button>
-          </div>
-          <div class="col-sm-12">
-            <div class="form-group text-uppercase">
-              <a [routerLink]="[celular.id,'aplicacion']">Ir a Aplicaciones</a>
+      <div class="div" [hidden]="celular.formularioCerrado || (disabledButtons.Oculto)">
+        <form action="">
+          <form class="animated bounceIn" (ngSubmit)="actualizarCelular(celular)" #NuevoCelularForm="ngForm">
+            <div  class="form-group">
+              <label>Celular</label>
+              <input required
+                     minlength="4"
+                     type="text"
+                     class="form-control"
+                     placeholder="Ingrese el nombre del celular"
+                     name="nombre"
+                     [(ngModel)]="celular.nombre"
+                     #nombre="ngModel"
+                     #nombreElm>
+              <input required
+                     minlength="4"
+                     type="text"
+                     class="form-control"
+                     placeholder="Ingrese el Sistema Operativo"
+                     name="sistemaOperativo"
+                     [(ngModel)]="celular.sistemaOperativo"
+                     #nombre="ngModel"
+                     #nombreElm>
+              <input required
+                     min="1"
+                     type="number"
+                     class="form-control"
+                     placeholder="Ingrese la versión del celular"
+                     name="version1"
+                     [(ngModel)]="celular.version1"
+                     #nombre="ngModel"
+                     #nombreElm>
             </div>
-          </div>
-        </div>
-        <div class="div" style="margin-top:50px; margin-bottom:20px" [hidden]="celular.formularioCerrado">
-          <form action="">
-            <form class="animated bounceIn" (ngSubmit)="actualizarCelular(celular)" #NuevoCelularForm="ngForm">
-              <div class="form-group">
-                <label>Celular</label>
-                <div class="animated slideInUp" [hidden]="!nombre.errors">
-                  <span class="bg-primary " *ngIf="nombre.errors && (nombre.dirty || nombre.touched)"> Ingrese un nombre y sistema operativo</span>
-                </div>
-                <input required
-                       type="text"
-                       class="form-control"
-                       placeholder="Ingrese el nombre del celular"
-                       name="nombre"
-                       [(ngModel)]="celular.nombre"
-                       #nombre="ngModel"
-                       #nombreEle>
-              </div>
-              <div class="form-group">
-                <label>SistemaOperativo</label>
-                <input required
-                       type="text"
-                       class="form-control"
-                       name="sistemaOperativo"
-                       [(ngModel)]="celular.sistemaOperativo"
-                       #nombre="ngModel"
-                       #nombreEle>
-              </div>
-              <div class="form-group">
-                <label>Versión</label>
-                <input required
-                       type="integer"
-                       class="form-control"
-                       placeholder="Ingrese la versión del celular"
-                       name="version"
-                       [(ngModel)]="celular.version"
-                       #nombre="ngModel"
-                       #nombreEle>
-              </div>
-              <button [disabled]="disabledButtons.NuevoCelularFormSubmitButton ||!NuevoCelularForm.valid" type="submit"
-                      class="btn btn-block btn-success">Actualizar
-              </button>
-              <button type="button"
-                      class="btn btn-block btn-warning"
-                      (click)="celular.formularioCerrado=!formularioCerrado" [routerLink]="['/celular']">Cancelar
-              </button>
-            </form>
+            <button [disabled]="disabledButtons.NuevoCelularFormSubmitButton||!NuevoCelularForm.valid" type="submit"
+                    class="btn btn-block btn-success">Actualizar
+            </button>
+            <button type="button"
+                    class="btn btn-block btn-warning"
+                    (click)="celular.formularioCerrado = !celular.formularioCerrado"
+            >Cancelar
+            </button>
           </form>
-        </div>
+        </form>
       </div>
     </div>
   </div>

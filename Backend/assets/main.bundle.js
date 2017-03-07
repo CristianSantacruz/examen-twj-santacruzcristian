@@ -24,8 +24,8 @@ var MasterUrlService = (function () {
         get: function () {
             return this._url;
         },
-        set: function (value) {
-            this._url = value;
+        set: function (nuevoUrl) {
+            this._url = nuevoUrl;
         },
         enumerable: true,
         configurable: true
@@ -67,11 +67,12 @@ var AplicacionComponent = (function () {
         this._ActivatedRoute = _ActivatedRoute;
         this._http = _http;
         this._masterURL = _masterURL;
-        this.title = "Bienvenidos a Ingresar Aplicaciones";
-        this.aplicaciones = [];
+        this.title = "Bienvenido a Aplicaciones";
         this.nuevaAplicacion = {};
+        this.aplicaciones = [];
         this.disabledButtons = {
-            NuevaAplicacionFormSubmitButton: false
+            NuevaAplicacionFormSubmitButton: false,
+            Oculto: false
         };
     }
     AplicacionComponent.prototype.ngOnInit = function () {
@@ -80,10 +81,9 @@ var AplicacionComponent = (function () {
             .params
             .subscribe(function (parametros) {
             _this._parametros = parametros;
-            _this._http.get(_this._masterURL.url + 'Aplicacion?idCelular=' + _this._parametros.idCelular)
+            _this._http.get(_this._masterURL.url + "Aplicacion?idCelular=" + _this._parametros.idCelular)
                 .subscribe(function (res) {
-                _this.aplicaciones = res.json()
-                    .map(function (value) {
+                _this.aplicaciones = res.json().map(function (value) {
                     value.formularioCerrado = true;
                     return value;
                 });
@@ -96,20 +96,22 @@ var AplicacionComponent = (function () {
         var _this = this;
         console.log(formulario);
         this.disabledButtons.NuevaAplicacionFormSubmitButton = true;
-        var nuevitaAplicacion = {
+        this._http.post(this._masterURL.url + "Aplicacion", {
             nombre: formulario.value.nombre,
-            version: formulario.value.version,
+            version2: formulario.value.version2,
             tamanio: formulario.value.tamanio,
             idCelular: this._parametros.idCelular
-        };
-        this._http.post(this._masterURL.url + 'Aplicacion', nuevitaAplicacion)
-            .subscribe(function (res) {
+        }).subscribe(function (res) {
+            console.log("No hubo errores");
+            console.log(res);
             _this.aplicaciones.push(res.json());
             _this.nuevaAplicacion = {};
             _this.disabledButtons.NuevaAplicacionFormSubmitButton = false;
+            _this.disabledButtons.Oculto = true;
         }, function (err) {
             _this.disabledButtons.NuevaAplicacionFormSubmitButton = false;
-            console.log(err);
+            console.log("Ocurrió un error", err);
+        }, function () {
         });
     };
     AplicacionComponent.prototype.borrarAplicacion = function (id) {
@@ -125,9 +127,8 @@ var AplicacionComponent = (function () {
     AplicacionComponent.prototype.actualizarAplicacion = function (aplicacion) {
         var parametos = {
             nombre: aplicacion.nombre,
-            version: aplicacion.version,
-            tamanio: aplicacion.tamanio,
-            idCelular: this._parametros.idCelular
+            version2: aplicacion.version2,
+            tamanio: aplicacion.tamanio
         };
         this._http.put(this._masterURL.url + "Aplicacion/" + aplicacion.id, parametos)
             .subscribe(function (res) {
@@ -176,18 +177,21 @@ var CelularComponent = (function () {
     function CelularComponent(_http, _masterURL) {
         this._http = _http;
         this._masterURL = _masterURL;
-        this.title = "Bienvenidos a Ingresar Celulares";
+        this.title = "Bienvenido a Celulares";
         this.nuevoCelular = {};
-        this.Celulares = [];
+        this.celulares = [];
         this.disabledButtons = {
-            NuevoCelularFormSubmitButton: false
+            NuevoCelularFormSubmitButton: false,
+            Oculto: false
         };
     }
     CelularComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.disabledButtons.Oculto = true;
         this._http.get(this._masterURL.url + "Celular")
             .subscribe(function (res) {
-            _this.Celulares = res.json().map(function (value) {
+            _this.celulares = res.json()
+                .map(function (value) {
                 value.formularioCerrado = true;
                 return value;
             });
@@ -197,24 +201,23 @@ var CelularComponent = (function () {
     };
     CelularComponent.prototype.crearCelular = function (formulario) {
         var _this = this;
+        console.log(formulario);
         this.disabledButtons.NuevoCelularFormSubmitButton = true;
-        var nuevoCelular = {
+        this._http.post(this._masterURL.url + "Celular", {
             nombre: formulario.value.nombre,
             sistemaOperativo: formulario.value.sistemaOperativo,
-            version: formulario.value.version
-        };
-        this._http.post(this._masterURL.url + "Celular", nuevoCelular)
-            .subscribe(function (res) {
-            console.log("Sin Errores");
+            version1: formulario.value.version1
+        }).subscribe(function (res) {
+            console.log("No hubo errores");
             console.log(res);
-            _this.Celulares.push(res.json());
+            _this.celulares.push(res.json());
             _this.nuevoCelular = {};
             _this.disabledButtons.NuevoCelularFormSubmitButton = false;
+            _this.disabledButtons.Oculto = true;
         }, function (err) {
             _this.disabledButtons.NuevoCelularFormSubmitButton = false;
-            console.log("Error: ", err);
+            console.log("Ocurrió un error", err);
         }, function () {
-            console.log("Termino la función vamos a las casas");
         });
     };
     CelularComponent.prototype.borrarCelular = function (id) {
@@ -222,21 +225,23 @@ var CelularComponent = (function () {
         this._http.delete(this._masterURL.url + "Celular/" + id)
             .subscribe(function (res) {
             var celularBorrado = res.json();
-            _this.Celulares = _this.Celulares.filter(function (value) { return celularBorrado.id != value.id; });
+            _this.celulares = _this.celulares.filter(function (value) { return celularBorrado.id != value.id; });
         }, function (err) {
             console.log(err);
         });
     };
     CelularComponent.prototype.actualizarCelular = function (celular) {
-        var parametros = {
-            nombre: celular.nombre
+        var parametos = {
+            nombre: celular.nombre,
+            sistemaOperativo: celular.sistemaOperativo,
+            version1: celular.version1
         };
-        this._http.put(this._masterURL.url + "Celular/" + celular.id, parametros)
+        this._http.put(this._masterURL.url + "Celular/" + celular.id, parametos)
             .subscribe(function (res) {
             celular.formularioCerrado = !celular.formularioCerrado;
-            console.log("Respuesta", res.json());
+            console.log("Respuesta:", res.json());
         }, function (err) {
-            console.log("Error" + err);
+            console.log("Error:", err);
         });
     };
     CelularComponent = __decorate([
@@ -539,28 +544,28 @@ module.exports = module.exports.toString();
 /***/ 515:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Bienvenidos a Ingresar Aplicaciones</h1>\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <label>Vista Preliminar</label>\n      <pre class=\"animated fadeInUp\">\n        {{nuevoJugador|json}}\n      </pre>\n    </div>\n    <div class=\"col-sm-6\">\n      <form class=\"animated bounceIn\" (ngSubmit)=\"crearAplicacion(NuevaAplicacionForm)\" #NuevaAplicacionForm=\"ngForm\">\n        <div class=\"form-group\">\n          <label>Nombre de la aplicacion</label>\n          <div class=\"animated slideInUp\" [hidden]=\"!nombre.errors\">\n            <span class=\"bg-primary \" *ngIf=\"nombre.errors && (nombre.dirty || nombre.touched)\"> Ingrese el nombre de la Aplicación</span>\n          </div>\n          <input type=\"text\"\n                 class=\"form-control\"\n                 required\n                 placeholder=\"Ingrese el nombre de la aplicación\"\n                 name=\"nombre\"\n                 [(ngModel)]=\"nuevaAplicacion.nombre\"\n                 #nombre=\"ngModel\"\n                 #nombreEle>\n        </div>\n        <div class=\"form-group\">\n          <label>Versión</label>\n          <input type=\"integer\"\n                 class=\"form-control\"\n                 name=\"version\"\n                 required\n                 [(ngModel)]=\"nuevaAplicacion.version\"\n                 #nombre=\"ngModel\"\n                 #nombreEle\n          >\n        </div>\n        <div class=\"form-group\">\n          <label>Tamaño</label>\n          <input type=\"integer\"\n                 class=\"form-control\"\n                 name=\"tamanio\"\n                 required\n                 placeholder=\"Ingrese el tamaño de la aplicación\"\n                 [(ngModel)]=\"nuevaAplicacion.tamanio\"\n                 #nombre=\"ngModel\"\n                 #nombreEle\n          >\n        </div>\n        <button [disabled]=\"disabledButtons.NuevaAplicacionFormSubmitButton ||!NuevaAplicacionForm.valid\" type=\"submit\"\n                class=\"btn btn-block btn-success\">Crear Aplicacion\n        </button>\n      </form>\n    </div>\n    <div class=\"col-sm-6 text-center\">\n      <h1>{{nuevaAplicacion.nombre}}</h1>\n      <h3>{{nuevaAplicacion.version}}</h3>\n      <h3>{{nuevaAplicacion.tamanio}}</h3>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-sm-12 animated flipInX\" *ngFor=\"let aplicacion of aplicaciones\">\n      <div class=\"text-center\">\n        <h3>{{jugador.nombre}}</h3>\n        <p>ID:{{jugador.id}}</p>\n        <p>Fichado hasta:{{jugador.fichadoHasta}}</p>\n        <p>Posición :{{jugador.posicion}}</p>\n      </div>\n      <div class=\"row animated flipInY\" [hidden]=\"!aplicacion.formularioCerrado\">\n        <div class=\"col-sm-5\">\n          <button class=\"btn btn-block btn-info\" (click)=\"aplicacion.formularioCerrado=!aplicacion.formularioCerrado\">Actualizar</button>\n        </div>\n        <div class=\"col-sm-2\"></div>\n        <div class=\"col-sm-5\">\n          <button class=\"btn btn-block btn-danger\" (click)=\"borrarJugador(jugador.id)\">Borrar</button>\n        </div>\n      </div>\n      <div class=\"div\" [hidden]=\"aplicacion.formularioCerrado\">\n        <form action=\"\">\n          <form class=\"animated bounceIn\" (ngSubmit)=\"actualizarAplicacion(aplicacion)\" #NuevaAplicacionForm=\"ngForm\">\n            <div class=\"form-group\">\n              <label>Aplicación</label>\n              <div class=\"animated slideInUp\" [hidden]=\"!nombre.errors\">\n                <span class=\"bg-primary \" *ngIf=\"nombre.errors && (nombre.dirty || nombre.touched)\"> Ingrese el nombre de la aplicación</span>\n              </div>\n              <input required\n                     type=\"text\"\n                     class=\"form-control\"\n                     placeholder=\"Ingrese el nombre de la aplicación\"\n                     name=\"nombre\"\n                     [(ngModel)]=\"aplicacion.nombre\"\n                     #nombre=\"ngModel\"\n                     #nombreEle>\n            </div>\n            <div class=\"form-group\">\n              <label>Versión</label>\n              <input required\n                     type=\"integer\"\n                     class=\"form-control\"\n                     name=\"version\"\n                     [(ngModel)]=\"aplicacion.version\"\n                     #nombre=\"ngModel\"\n                     #nombreEle>\n            </div>\n            <div class=\"form-group\">\n              <label>Tamaño</label>\n              <input required\n                     type=\"integer\"\n                     class=\"form-control\"\n                     placeholder=\"Ingrese el tamaño de la aplicación\"\n                     name=\"tamanio\"\n                     [(ngModel)]=\"aplicacion.tamanio\"\n                     #nombre=\"ngModel\"\n                     #nombreEle>\n            </div>\n            <button [disabled]=\"disabledButtons.NuevaAplicacionFormSubmitButton ||!NuevaAplicacionForm.valid\" type=\"submit\"\n                    class=\"btn btn-block btn-success\">Actualizar\n            </button>\n            <button type=\"button\"\n                    class=\"btn btn-block btn-warning\"\n                    (click)=\"aplicacion.formularioCerrado=!formularioCerrado\"\n            >Cancelar\n            </button>\n          </form>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<h1 align=\"center\">{{title}} del Celular{{this._parametros.idCelular}}</h1>\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-sm-5\">\n      <form class=\"animated bounceIn\" (ngSubmit)=\"crearAplicacion(NuevaAplicacionForm)\" #NuevaAplicacionForm=\"ngForm\">\n        <div class=\"form-group\">\n          <label>Aplicacion</label>\n          <input required\n                 minlength=\"4\"\n                 type=\"text\"\n                 class=\"form-control\"\n                 placeholder=\"Ingrese el nombre de la aplicacion\"\n                 name=\"nombre\"\n                 [(ngModel)]=\"nuevaAplicacion.nombre\"\n                 #nombre=\"ngModel\"\n                 #nombreElm>\n        </div>\n\n        <div class=\"form-group\">\n          <label>Version</label>\n          <input required\n                 min=\"1\"\n                 type=\"number\"\n                 class=\"form-control\"\n                 placeholder=\"Ingrese la versión de la aplicación\"\n                 name=\"version2\"\n                 [(ngModel)]=\"nuevaAplicacion.version2\"\n                 #nombre=\"ngModel\"\n                 #nombreElm>\n        </div>\n\n        <div class=\"form-group\">\n          <label>Tamaño</label>\n          <input required\n                 type=\"number\"\n                 min = \"1\"\n                 class=\"form-control\"\n                 placeholder=\"Ingrese el tamaño de la aplicación\"\n                 name=\"tamanio\"\n                 [(ngModel)]=\"nuevaAplicacion.tamanio\"\n                 #nombre=\"ngModel\"\n                 #nombreElm>\n        </div>\n\n        <button [disabled]=\"disabledButtons.NuevaAplicacionFormSubmitButton||!NuevaAplicacionForm.valid\"\n                class=\"btn btn-block btn-success\" type=\"submit\">Crear Aplicacion\n        </button>\n      </form>\n    </div>\n    <div class=\"col-sm-5 animated flipInX table-bordered ma-margen-top-bottom ma-padding-top-bottom\" *ngFor=\"let aplicacion of aplicaciones\">\n      <div class=\"text-center\">\n        <h3>{{aplicacion.nombre}}</h3>\n        <p>Versión: {{aplicacion.version2}}</p>\n        <p>Tamaño: {{aplicacion.tamanio}} MB</p>\n      </div>\n      <div class=\"row animated flipInY\" >\n        <div class=\"col-sm-5\" >\n          <button class=\"btn btn-block btn-info\"\n                  (click)=\"disabledButtons.Oculto = false; aplicacion.formularioCerrado = !aplicacion.formularioCerrado\"\n          >Actualizar</button>\n        </div>\n        <div class=\"col-sm-2\"></div>\n        <div class=\"col-sm-5\">\n          <button class=\"btn btn-block btn-danger\" (click)=\"borrarAplicacion(aplicacion.id)\">Borrar</button>\n        </div>\n        <div class=\"row\">\n          <div class=\"col-sm-4\"></div>\n        </div>\n      </div>\n      <div class=\"div\" [hidden]=\"aplicacion.formularioCerrado || (disabledButtons.Oculto)\">\n        <form action=\"\">\n          <form class=\"animated bounceIn\" (ngSubmit)=\"actualizarAplicacion(aplicacion)\" #NuevaAplicacionForm=\"ngForm\">\n            <div  class=\"form-group\">\n              <label>Aplicacion</label>\n              <input required\n                     minlength=\"4\"\n                     type=\"text\"\n                     class=\"form-control\"\n                     placeholder=\"Ingrese el nombre de la aplicación\"\n                     name=\"nombre\"\n                     [(ngModel)]=\"aplicacion.nombre\"\n                     #nombre=\"ngModel\"\n                     #nombreElm>\n              <input required\n                     min=\"1\"\n                     type=\"number\"\n                     class=\"form-control\"\n                     placeholder=\"Ingrese la versión de la aplicación\"\n                     name=\"version2\"\n                     [(ngModel)]=\"aplicacion.version2\"\n                     #nombre=\"ngModel\"\n                     #nombreElm>\n              <input required\n                     min=\"1\"\n                     type=\"number\"\n                     class=\"form-control\"\n                     placeholder=\"Ingrese el tamaño de la aplicación\"\n                     name=\"tamanio\"\n                     [(ngModel)]=\"aplicacion.tamanio\"\n                     #nombre=\"ngModel\"\n                     #nombreElm>\n            </div>\n            <button [disabled]=\"disabledButtons.NuevaAplicacionFormSubmitButton||!NuevaAplicacionForm.valid\" type=\"submit\"\n                    class=\"btn btn-block btn-success\">Actualizar\n            </button>\n            <button type=\"button\"\n                    class=\"btn btn-block btn-warning\"\n                    (click)=\"aplicacion.formularioCerrado = !aplicacion.formularioCerrado\"\n            >Cancelar\n            </button>\n          </form>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
 /***/ 516:
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-inverse\" >\n  <ul class=\"nav navbar-nav\">\n    <li><a class=\"navbar-brand\" [routerLink]=\"['/home']\">Home</a></li>\n    <li><a class=\"navbar-brand\" [routerLink]=\"['/celular']\">Celular</a></li>\n    <li><a class=\"navbar-brand\" [routerLink]=\"['/celular','1','aplicacion']\">Aplicacion</a></li>\n  </ul>\n</nav>\n<router-outlet></router-outlet>\n"
+module.exports = "<!DOCTYPE html>\n<html>\n<head>\n  <title><%=typeof title == 'undefined' ? '' : title%></title>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\">\n</head>\n\n<body>\n<nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\"\n              data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span>MENÚ</span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">Celulares App</a>\n    </div>\n\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n        <li><a [routerLink]=\"['/home']\">Inicio</a></li>\n        <li><a [routerLink]=\"['/celular']\">Crear Celulares</a></li>\n      </ul>\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n<div class=\"container\">\n</div>\n\n</body>\n</html>\n\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
 /***/ 517:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>{{title}}</h1>\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <pre class=\"animated fadeInUp\">\n        {{ nuevoCelular | json}}\n      </pre>\n    </div>\n    <div class=\"col-sm-6\">\n      <form class=\"animated bounceIn\" (ngSubmit)=\"crearCelular(NuevoCelularForm)\" #NuevoCelularForm=\"ngForm\">\n        <div class=\"form-group\">\n          <label>Celular</label>\n          <div class=\"animated slideInUp\" [hidden]=\"!nombre.errors\">\n            <span class=\"bg-primary \" *ngIf=\"nombre.errors && (nombre.dirty || nombre.touched)\"> Ingrese un nombre de Sistema Operativo</span>\n          </div>\n          <input required\n                 minlength=\"5\"\n                 type=\"text\"\n                 class=\"form-control\"\n                 placeholder=\"Ingrese el nombre del celular\"\n                 name=\"nombre\"\n                 [(ngModel)]=\"nuevoCelular.nombre\"\n                 #nombre=\"ngModel\"\n                 #nombreEle>\n        </div>\n        <div class=\"form-group\">\n          <label>Sistema Operativo</label>\n          <input type=\"text\"\n                 required\n                 name=\"sistemaOperativo\"\n                 class=\"form-control\"\n                 [(ngModel)]=\"nuevoCelular.sistemaOperativo\"\n                 #nombre=\"ngModel\"\n                 #nombreEle\n          >\n        </div>\n        <div class=\"form-group\">\n          <label>Versión</label>\n          <input type=\"integer\"\n                 name=\"version\"\n                 required\n                 minlength=\"1\"\n                 placeholder=\"Ingrese la versión del celular\"\n                 class=\"form-control\"\n                 [(ngModel)]=\"nuevoCelular.version\"\n                 #nombre=\"ngModel\"\n                 #nombreEle\n          >\n        </div>\n        <button [disabled]=\"disabledButtons.NuevoCelularFormSubmitButton ||!NuevoCelularForm.valid\" type=\"submit\"\n                class=\"btn btn-block btn-success\">Crear\n        </button>\n      </form>\n    </div>\n    <div class=\"col-sm-6\">\n      <h1>{{nuevoCelular.nombre}}</h1>\n      <h1>{{nuevoCelular.sistemaOperativo}}</h1>\n      <h1>{{nuevoCelular.version}}</h1>\n    </div>\n\n  </div>\n  <div class=\"row\">\n    <div class=\"col-sm-12 animated flipInX\" *ngFor=\"let celular of Celulares\">\n      <div class=\"text-center\">\n        <h3>{{celular.nombre}}</h3>\n        <p>ID: {{celular.id}}</p>\n        <p>Sistema Operativo: {{celular.sistemaOperativo}}</p>\n        <p>Versión: {{celular.version}}</p>\n      </div>\n      <div class=\"row animated flipInY\" [hidden]=\"!celular.formularioCerrado\">\n        <div class=\"col-sm-5\">\n          <button class=\"btn btn-block btn-info\" (click)=\"celular.formularioCerrado=!celular.formularioCerrado\">\n            Actualizar\n          </button>\n        </div>\n        <div class=\"col-sm-2\"></div>\n        <div class=\"col-sm-5\">\n          <button class=\"btn btn-block btn-danger\" (click)=\"borrarCelular(celular.id)\">Borrar</button>\n        </div>\n        <div class=\"col-sm-12\">\n          <div class=\"form-group text-uppercase\">\n            <a [routerLink]=\"[celular.id,'aplicacion']\">Ir a Aplicaciones</a>\n          </div>\n        </div>\n      </div>\n      <div class=\"div\" [hidden]=\"celular.formularioCerrado\">\n        <form action=\"\">\n          <form class=\"animated bounceIn\" (ngSubmit)=\"actualizarCelular(celular)\" #NuevoCelularForm=\"ngForm\">\n            <div class=\"form-group\">\n              <label>Celular</label>\n              <div class=\"animated slideInUp\" [hidden]=\"!nombre.errors\">\n                <span class=\"bg-primary \" *ngIf=\"nombre.errors && (nombre.dirty || nombre.touched)\"> Ingrese el nombre del celular</span>\n              </div>\n              <input required\n                     minlength=\"5\"\n                     type=\"text\"\n                     class=\"form-control\"\n                     placeholder=\"Ingrese el nombre del celular\"\n                     name=\"nombre\"\n                     [(ngModel)]=\"celular.nombre\"\n                     #nombre=\"ngModel\"\n                     #nombreEle>\n            </div>\n            <div class=\"form-group\">\n              <label>Sistema Operativo</label>\n              <input required\n                     type=\"text\"\n                     class=\"form-control\"\n                     name=\"sistemaOperativo\"\n                     [(ngModel)]=\"celular.sistemaOperativo\"\n                     #nombre=\"ngModel\"\n                     #nombreEle>\n            </div>\n            <div class=\"form-group\">\n              <label>Versión</label>\n              <input required\n                     minlength=\"1\"\n                     type=\"integer\"\n                     class=\"form-control\"\n                     placeholder=\"Ingrese la versión del celular\"\n                     name=\"version\"\n                     [(ngModel)]=\"celular.version\"\n                     #nombre=\"ngModel\"\n                     #nombreEle>\n            </div>\n            <button [disabled]=\"disabledButtons.NuevoCelularFormSubmitButton ||!NuevoCelularForm.valid\" type=\"submit\"\n                    class=\"btn btn-block btn-success\">Actualizar\n            </button>\n            <button type=\"button\"\n                    class=\"btn btn-block btn-warning\"\n                    (click)=\"celular.formularioCerrado=!formularioCerrado\" [routerLink]=\"['/celular']\">Cancelar\n            </button>\n          </form>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "<h1 align=\"center\">{{title}}</h1>\n\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-sm-5\">\n      <form class=\"animated bounceIn\" (ngSubmit)=\"crearCelular(NuevoCelularForm)\" #NuevoCelularForm=\"ngForm\">\n        <div class=\"form-group\">\n          <label>Celular</label>\n          <input required\n                 minlength=\"4\"\n                 type=\"text\"\n                 class=\"form-control\"\n                 placeholder=\"Ingrese el nombre del celular\"\n                 name=\"nombre\"\n                 [(ngModel)]=\"nuevoCelular.nombre\"\n                 #nombre=\"ngModel\"\n                 #nombreElm>\n        </div>\n\n        <div class=\"form-group\">\n          <label>Sistema Operativo</label>\n          <input required\n                 minlength=\"4\"\n                 type=\"text\"\n                 class=\"form-control\"\n                 placeholder=\"Ingrese el Sistema Operativo\"\n                 name=\"sistemaOperativo\"\n                 [(ngModel)]=\"nuevoCelular.sistemaOperativo\"\n                 #nombre=\"ngModel\"\n                 #nombreElm>\n        </div>\n\n        <div class=\"form-group\">\n          <label>Versión</label>\n\n          <input required\n                 type=\"number\"\n                 min = \"1\"\n                 class=\"form-control\"\n                 placeholder=\"Ingrese la versión del celular\"\n                 name=\"version1\"\n                 [(ngModel)]=\"nuevoCelular.version1\"\n                 #nombre=\"ngModel\"\n                 #nombreElm>\n        </div>\n\n        <button [disabled]=\"disabledButtons.NuevoCelularFormSubmitButton||!NuevoCelularForm.valid\" type=\"submit\"\n                class=\"btn btn-block btn-success\">Crear Celular\n        </button>\n      </form>\n    </div>\n    <div class=\"col-sm-5 animated flipInX table-bordered ma-margen-top-bottom ma-padding-top-bottom\" *ngFor=\"let celular of celulares\">\n      <div class=\"text-center\">\n        <h3>{{celular.nombre}}</h3>\n        <h3>ID: {{celular.id}}</h3>\n        <p>Sistema Operativo: {{celular.sistemaOperativo}}</p>\n        <p>Versión: {{celular.version1}}</p>\n      </div>\n\n      <div  class=\"row animated flipInY\" >\n        <div class=\"col-sm-5\" >\n          <button class=\"btn btn-block btn-info\"\n                  (click)=\"disabledButtons.Oculto = false; celular.formularioCerrado = !celular.formularioCerrado\"\n          >Actualizar</button>\n        </div>\n        <div class=\"col-sm-2\"></div>\n        <div class=\"col-sm-5\">\n          <button class=\"btn btn-block btn-danger\" (click)=\"borrarCelular(celular.id)\">Borrar</button>\n        </div>\n        <div class=\"row\">\n          <div class=\"col-sm-4\"></div>\n          <div class=\"col-sm-4\">\n            <button class=\"btn btn-block btn-success\" [routerLink]=\"[celular.id,'aplicacion']\">Ir a Aplicaciones</button>\n          </div>\n        </div>\n      </div>\n      <div class=\"div\" [hidden]=\"celular.formularioCerrado || (disabledButtons.Oculto)\">\n        <form action=\"\">\n          <form class=\"animated bounceIn\" (ngSubmit)=\"actualizarCelular(celular)\" #NuevoCelularForm=\"ngForm\">\n            <div  class=\"form-group\">\n              <label>Celular</label>\n              <input required\n                     minlength=\"4\"\n                     type=\"text\"\n                     class=\"form-control\"\n                     placeholder=\"Ingrese el nombre del celular\"\n                     name=\"nombre\"\n                     [(ngModel)]=\"celular.nombre\"\n                     #nombre=\"ngModel\"\n                     #nombreElm>\n              <input required\n                     minlength=\"4\"\n                     type=\"text\"\n                     class=\"form-control\"\n                     placeholder=\"Ingrese el Sistema Operativo\"\n                     name=\"sistemaOperativo\"\n                     [(ngModel)]=\"celular.sistemaOperativo\"\n                     #nombre=\"ngModel\"\n                     #nombreElm>\n              <input required\n                     min=\"1\"\n                     type=\"number\"\n                     class=\"form-control\"\n                     placeholder=\"Ingrese la versión del celular\"\n                     name=\"version1\"\n                     [(ngModel)]=\"celular.version1\"\n                     #nombre=\"ngModel\"\n                     #nombreElm>\n            </div>\n            <button [disabled]=\"disabledButtons.NuevoCelularFormSubmitButton||!NuevoCelularForm.valid\" type=\"submit\"\n                    class=\"btn btn-block btn-success\">Actualizar\n            </button>\n            <button type=\"button\"\n                    class=\"btn btn-block btn-warning\"\n                    (click)=\"celular.formularioCerrado = !celular.formularioCerrado\"\n            >Cancelar\n            </button>\n          </form>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 518:
 /***/ (function(module, exports) {
 
-module.exports = "<h1 class=\"text-center text-info\">Bienvenidos</h1>\n<div row>\n  <div class=\"col-sm-2\"></div>\n  <div class=\"jumbotron col-sm-8 text-center\" style=\"background:#D8F6CE\">\n    <h1>Celulares</h1>\n    <p>Registrar Celulares</p>\n    <p>\n      <a class=\"btn btn-primary btn-lg\" [routerLink]=\"['/celular']\" role=\"button\">Crear Celular</a>\n    </p>\n  </div>\n  <div class=\"col-sm-2\"></div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h1>Bienvenidos</h1>\n\n  <div row>\n    <div class=\"jumbotron col-sm-5\">\n      <h1>Celulares</h1>\n      <p>Registrar Celulares</p>\n      <p><a class=\"btn btn-primary btn-lg\" [routerLink]=\"['/celular']\" role=\"button\">Crear Celulares</a>  </p>\n    </div>\n    <div class=\"col-sm-1\"> </div>\n  </div>\n</div>\n"
 
 /***/ }),
 

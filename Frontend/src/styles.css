@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.ma-margen-top-bottom {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.ma-padding-top-bottom {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

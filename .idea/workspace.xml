@@ -16,7 +16,21 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="aplicacion.component.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="536">
+              <caret line="144" column="6" lean-forward="false" selection-start-line="144" selection-start-column="6" selection-end-line="144" selection-end-column="6" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -26,7 +40,6 @@
       <list>
         <option value="$PROJECT_DIR$/Frontend/src/app/services/master-url.service.ts" />
         <option value="$PROJECT_DIR$/Frontend/src/app/home/home.component.html" />
-        <option value="$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.html" />
         <option value="$PROJECT_DIR$/Frontend/src/app/app.component.ts" />
         <option value="$PROJECT_DIR$/Frontend/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/Frontend/src/index.html" />
@@ -38,6 +51,7 @@
         <option value="$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.ts" />
         <option value="$PROJECT_DIR$/Frontend/src/app/celular/celular.component.ts" />
         <option value="$PROJECT_DIR$/Frontend/src/app/celular/celular.component.html" />
+        <option value="$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.html" />
       </list>
     </option>
   </component>
@@ -160,7 +174,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="celular" />
+              <option name="myItemId" value="aplicacion" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -247,19 +261,19 @@
       <option name="presentableId" value="Default" />
       <updated>1488810556762</updated>
       <workItem from="1488810562132" duration="3949000" />
-      <workItem from="1488850277977" duration="10140000" />
+      <workItem from="1488850277977" duration="11126000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14089000" />
+    <option name="totallyTimeSpent" value="15075000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1370" height="744" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963072" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963072" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -357,18 +371,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#73#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="127" column="6" lean-forward="true" selection-start-line="127" selection-start-column="6" selection-end-line="127" selection-end-column="6" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -506,7 +508,18 @@
           <caret line="145" column="0" lean-forward="true" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
           <folding>
             <element signature="n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/src/app/aplicacion/aplicacion.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="144" column="6" lean-forward="false" selection-start-line="144" selection-start-column="6" selection-end-line="144" selection-end-column="6" />
+          <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
           </folding>

@@ -14,7 +14,8 @@ export class AplicacionComponent implements OnInit {
   title: string = "Bienvenidos a Ingresar Aplicaciones";
   private _parametros;
   aplicaciones = [];
-  nuevaAplicacion: any = {};
+  nuevaAplicacion = {};
+  aplicacionAntigua = this.nuevaAplicacion;
   disabledButtons = {
   NuevaAplicacionFormSubmitButton: false
   };

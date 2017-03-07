@@ -9,12 +9,11 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./celular.component.css']
 })
 export class CelularComponent implements OnInit {
-
   title: string = "Bienvenidos a Ingresar Celulares";
   nuevoCelular: any = {};
   Celulares = [];
   disabledButtons={
-    NuevoCelularFormSubmitButton:false
+  NuevoCelularFormSubmitButton:false
   };
 
   constructor(private _http: Http,
@@ -52,7 +51,7 @@ export class CelularComponent implements OnInit {
         },
         (err)=>{
           this.disabledButtons.NuevoCelularFormSubmitButton=false;
-          console.log("Error: ",err);
+          console.log("Error",err);
         },
         ()=>{
           console.log("Termino la función vamos a las casas");

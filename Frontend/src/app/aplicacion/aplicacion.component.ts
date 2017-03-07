@@ -14,7 +14,7 @@ export class AplicacionComponent implements OnInit {
   title: string = "Bienvenidos a Ingresar Aplicaciones";
   private _parametros;
   aplicaciones = [];
-  nuevaAplicacion = {};
+  nuevaAplicacion: any = {};
   disabledButtons = {
   NuevaAplicacionFormSubmitButton: false
   };
@@ -43,13 +43,13 @@ export class AplicacionComponent implements OnInit {
           )
       });
   }
-  crearJugador(formulario: NgForm) {
+  crearAplicacion(formulario: NgForm) {
     console.log(formulario);
     this.disabledButtons.NuevaAplicacionFormSubmitButton = true;
     let nuevitaAplicacion = {
       nombre: formulario.value.nombre,
       version: formulario.value.version,
-      tamaño: formulario.value.tamaño,
+      tamanio: formulario.value.tamanio,
       idCelular: this._parametros.idCelular
     };
     this._http.post(this._masterURL.url + 'Aplicacion', nuevitaAplicacion)
@@ -65,7 +65,7 @@ export class AplicacionComponent implements OnInit {
         }
       );
   }
-  borrarJugador(id: number) {
+  borrarAplicacion(id: number) {
     this._http.delete(this._masterURL.url + "Aplicacion/" + id)
       .subscribe(
         (res) => {
@@ -77,11 +77,11 @@ export class AplicacionComponent implements OnInit {
         }
       );
   }
-  actualizarJugador(aplicacion: any) {
+  actualizarAplicacion(aplicacion: any) {
     let parametos = {
       nombre: aplicacion.nombre,
       version: aplicacion.version,
-      tamaño: aplicacion.tamaño,
+      tamanio: aplicacion.tamanio,
       idCelular: this._parametros.idCelular
     };
     this._http.put(this._masterURL.url + "Aplicacion/" + aplicacion.id, parametos)

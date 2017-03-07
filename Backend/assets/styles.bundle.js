@@ -35,7 +35,7 @@ exports = module.exports = __webpack_require__(60)();
 
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n.ma-margen-top-bottom {\n  margin-top: 20px;\n  margin-bottom: 20px;\n}\n.ma-padding-top-bottom {\n  padding-top: 20px;\n  padding-bottom: 20px;\n}\n", ""]);
 
 // exports
 

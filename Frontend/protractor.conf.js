@@ -1,8 +1,10 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
+/*global jasmine */
 const { SpecReporter } = require('jasmine-spec-reporter');
 
+//noinspection JSAnnotator
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
@@ -21,7 +23,7 @@ exports.config = {
   },
   beforeLaunch: function() {
     require('ts-node').register({
-      project: 'e2e/tsconfig.e2e.json'
+      project: 'e2e'
     });
   },
   onPrepare() {

@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {MasterUrlService} from "../services/master-url.service";
 import {Http, Response} from "@angular/http";
+import {MasterURlService} from "../services/master-url.service";
 import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-celular',
-  templateUrl: './celular.component.html',
-  styleUrls: ['./celular.component.css']
+  templateUrl: 'celular.component.html',
+  styleUrls: ['celular.component.css']
 })
 export class CelularComponent implements OnInit {
+
   title: string = "Bienvenido a Celulares";
   nuevoCelular = {};
   celulares= [];
@@ -18,7 +19,8 @@ export class CelularComponent implements OnInit {
   };
 
   constructor(private _http: Http,
-              private _masterURL:MasterUrlService) { }
+              private _masterURL: MasterURlService) {
+  }
 
   ngOnInit() {
     this.disabledButtons.Oculto = true;
@@ -36,7 +38,7 @@ export class CelularComponent implements OnInit {
         }
       )
   }
-  crearCelular(formulario:NgForm) {
+  crearCelular(formulario: NgForm) {
     console.log(formulario);
     this.disabledButtons.NuevoCelularFormSubmitButton = true;
     this._http.post(this._masterURL.url + "Celular", {
@@ -60,7 +62,8 @@ export class CelularComponent implements OnInit {
       }
     );
   }
-  borrarCelular(id:number){
+
+  borrarCelular(id: number) {
     this._http.delete(this._masterURL.url + "Celular/" + id)
       .subscribe(
         (res) => {
@@ -72,7 +75,8 @@ export class CelularComponent implements OnInit {
         }
       )
   }
-  actualizarCelular(celular:any){
+
+  actualizarCelular(celular: any) {
     let parametos = {
       nombre: celular.nombre,
       sistemaOperativo: celular.sistemaOperativo,

@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Http, Response} from "@angular/http";
-import {MasterUrlService} from "../services/master-url.service";
+import {MasterURlService} from "../services/master-url.service";
 import {NgForm} from "@angular/forms";
+
 
 @Component({
   selector: 'app-aplicacion',
-  templateUrl: './aplicacion.component.html',
-  styleUrls: ['./aplicacion.component.css']
+  templateUrl: 'aplicacion.component.html',
+  styleUrls: ['aplicacion.component.css']
 })
 export class AplicacionComponent implements OnInit {
   private _parametros: any;
-  title: string = "Bienvenido a Aplicaciones";
+  title: string = "Bienvenido a Aplicacion";
   nuevaAplicacion= {};
   aplicaciones=[];
   disabledButtons = {
@@ -20,9 +21,9 @@ export class AplicacionComponent implements OnInit {
   };
 
   constructor(private _ActivatedRoute: ActivatedRoute,
-              private _http: Http,
-              private _masterURL: MasterUrlService) { }
-
+              private _http:Http,
+              private _masterURL:MasterURlService) {
+  }
   ngOnInit() {
     this._ActivatedRoute
       .params

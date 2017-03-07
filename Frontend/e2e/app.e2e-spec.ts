@@ -1,10 +1,10 @@
-import { FrontendPage } from './app.po';
+import { AplicacionPruebaPage } from './app.po';
 
-describe('frontend App', () => {
-  let page: FrontendPage;
+describe('aplicacion-prueba App', () => {
+  let page: AplicacionPruebaPage;
 
   beforeEach(() => {
-    page = new FrontendPage();
+    page = new AplicacionPruebaPage();
   });
 
   it('should display message saying app works', () => {

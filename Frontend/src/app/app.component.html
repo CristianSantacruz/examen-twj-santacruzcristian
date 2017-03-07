@@ -2,31 +2,42 @@
 <html>
 <head>
   <title><%=typeof title == 'undefined' ? '' : title%></title>
+
+
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
 </head>
 
 <body>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
               data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span>MENÚ</span>
       </button>
-      <a class="navbar-brand" href="#">Celulares App</a>
+      <a class="navbar-brand" href="#">Celular App</a>
     </div>
 
+    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a [routerLink]="['/home']">Inicio</a></li>
-        <li><a [routerLink]="['/celular']">Crear Celulares</a></li>
-        <li><a [routerLink]="['/aplicacion']">Crear Aplicacion</a></li>
+        <li><a [routerLink]="['/celular']">Listar y Crear Celulares</a></li>
+        <!--<li><a [routerLink]="['/bodega','*','item']">Listar Items</a></li>-->
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<div class="container">
+
+</div>
+
 
 </body>
 </html>
 
 <router-outlet></router-outlet>
+

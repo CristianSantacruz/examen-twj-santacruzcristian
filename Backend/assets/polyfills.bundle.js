@@ -992,7 +992,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * Needed for: All but Chrome, Firefox, Edge, IE11 and Safari 10
  */
 // import 'intl';  // Run `npm install --save intl`.
-//# sourceMappingURL=polyfills.js.map
+//# sourceMappingURL=C:/Users/Cristian/Documents/GitHub/examen-twj-santacruzcristian/Frontend/src/polyfills.js.map
 
 /***/ }),
 

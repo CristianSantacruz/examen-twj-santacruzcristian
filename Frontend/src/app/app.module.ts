@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import {MasterURlService} from "./services/master-url.service";
 import { HomeComponent } from './home/home.component';
-import { CelularComponent } from './celular/celular.component';
-import { AplicacionComponent } from './aplicacion/aplicacion.component';
 import {routing} from "./app.routes";
-import {MasterUrlService} from "./services/master-url.service";
+import {CelularComponent} from './celular/celular.component';
+import {AplicacionComponent} from './aplicacion/aplicacion.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +24,9 @@ import {MasterUrlService} from "./services/master-url.service";
     routing
   ],
   providers: [
-    MasterUrlService
+    MasterURlService
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

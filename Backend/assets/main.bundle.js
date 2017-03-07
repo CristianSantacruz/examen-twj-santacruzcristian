@@ -5,7 +5,7 @@ webpackJsonp([1,4],{
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MasterUrlService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MasterURlService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -16,11 +16,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var MasterUrlService = (function () {
-    function MasterUrlService() {
+var MasterURlService = (function () {
+    function MasterURlService() {
         this._url = "http://localhost:1337/";
+        //  this._url = "http://examen-twj-lemasantiago-santiagolema.c9users.io:8080/"
     }
-    Object.defineProperty(MasterUrlService.prototype, "url", {
+    Object.defineProperty(MasterURlService.prototype, "url", {
         get: function () {
             return this._url;
         },
@@ -30,13 +31,13 @@ var MasterUrlService = (function () {
         enumerable: true,
         configurable: true
     });
-    MasterUrlService = __decorate([
+    MasterURlService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(), 
         __metadata('design:paramtypes', [])
-    ], MasterUrlService);
-    return MasterUrlService;
+    ], MasterURlService);
+    return MasterURlService;
 }());
-//# sourceMappingURL=master-url.service.js.map
+//# sourceMappingURL=C:/Users/Cristian/Documents/GitHub/examen-twj-santacruzcristian/Frontend/src/master-url.service.js.map
 
 /***/ }),
 
@@ -67,7 +68,7 @@ var AplicacionComponent = (function () {
         this._ActivatedRoute = _ActivatedRoute;
         this._http = _http;
         this._masterURL = _masterURL;
-        this.title = "Bienvenido a Aplicaciones";
+        this.title = "Bienvenido a Aplicacion";
         this.nuevaAplicacion = {};
         this.aplicaciones = [];
         this.disabledButtons = {
@@ -144,12 +145,12 @@ var AplicacionComponent = (function () {
             template: __webpack_require__(515),
             styles: [__webpack_require__(510)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_master_url_service__["a" /* MasterUrlService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__services_master_url_service__["a" /* MasterUrlService */]) === 'function' && _c) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_master_url_service__["a" /* MasterURlService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__services_master_url_service__["a" /* MasterURlService */]) === 'function' && _c) || Object])
     ], AplicacionComponent);
     return AplicacionComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=aplicacion.component.js.map
+//# sourceMappingURL=C:/Users/Cristian/Documents/GitHub/examen-twj-santacruzcristian/Frontend/src/aplicacion.component.js.map
 
 /***/ }),
 
@@ -158,8 +159,8 @@ var AplicacionComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_master_url_service__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_master_url_service__ = __webpack_require__(191);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CelularComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -250,12 +251,12 @@ var CelularComponent = (function () {
             template: __webpack_require__(517),
             styles: [__webpack_require__(512)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_master_url_service__["a" /* MasterUrlService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_master_url_service__["a" /* MasterUrlService */]) === 'function' && _b) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_master_url_service__["a" /* MasterURlService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services_master_url_service__["a" /* MasterURlService */]) === 'function' && _b) || Object])
     ], CelularComponent);
     return CelularComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=celular.component.js.map
+//# sourceMappingURL=C:/Users/Cristian/Documents/GitHub/examen-twj-santacruzcristian/Frontend/src/celular.component.js.map
 
 /***/ }),
 
@@ -290,7 +291,7 @@ var HomeComponent = (function () {
     ], HomeComponent);
     return HomeComponent;
 }());
-//# sourceMappingURL=home.component.js.map
+//# sourceMappingURL=C:/Users/Cristian/Documents/GitHub/examen-twj-santacruzcristian/Frontend/src/home.component.js.map
 
 /***/ }),
 
@@ -325,7 +326,7 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["a" /* enableProdMode */])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=C:/Users/Cristian/Documents/GitHub/examen-twj-santacruzcristian/Frontend/src/main.js.map
 
 /***/ }),
 
@@ -360,7 +361,7 @@ var AppComponent = (function () {
     ], AppComponent);
     return AppComponent;
 }());
-//# sourceMappingURL=app.component.js.map
+//# sourceMappingURL=C:/Users/Cristian/Documents/GitHub/examen-twj-santacruzcristian/Frontend/src/app.component.js.map
 
 /***/ }),
 
@@ -373,11 +374,11 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(414);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(453);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home_component__ = __webpack_require__(306);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__celular_celular_component__ = __webpack_require__(305);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__aplicacion_aplicacion_component__ = __webpack_require__(304);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_routes__ = __webpack_require__(455);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_master_url_service__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_master_url_service__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__home_home_component__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_routes__ = __webpack_require__(455);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__celular_celular_component__ = __webpack_require__(305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__aplicacion_aplicacion_component__ = __webpack_require__(304);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -405,18 +406,18 @@ var AppModule = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["b" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__home_home_component__["a" /* HomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__celular_celular_component__["a" /* CelularComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__aplicacion_aplicacion_component__["a" /* AplicacionComponent */]
+                __WEBPACK_IMPORTED_MODULE_6__home_home_component__["a" /* HomeComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__celular_celular_component__["a" /* CelularComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__aplicacion_aplicacion_component__["a" /* AplicacionComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
-                __WEBPACK_IMPORTED_MODULE_8__app_routes__["a" /* routing */]
+                __WEBPACK_IMPORTED_MODULE_7__app_routes__["a" /* routing */]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_9__services_master_url_service__["a" /* MasterUrlService */]
+                __WEBPACK_IMPORTED_MODULE_5__services_master_url_service__["a" /* MasterURlService */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
         }), 
@@ -424,7 +425,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=app.module.js.map
+//# sourceMappingURL=C:/Users/Cristian/Documents/GitHub/examen-twj-santacruzcristian/Frontend/src/app.module.js.map
 
 /***/ }),
 
@@ -449,7 +450,7 @@ var routes = [
     { path: 'celular/:idCelular/aplicacion', component: __WEBPACK_IMPORTED_MODULE_3__aplicacion_aplicacion_component__["a" /* AplicacionComponent */] }
 ];
 var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forRoot(routes);
-//# sourceMappingURL=app.routes.js.map
+//# sourceMappingURL=C:/Users/Cristian/Documents/GitHub/examen-twj-santacruzcristian/Frontend/src/app.routes.js.map
 
 /***/ }),
 
@@ -465,7 +466,7 @@ var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule 
 var environment = {
     production: false
 };
-//# sourceMappingURL=environment.js.map
+//# sourceMappingURL=C:/Users/Cristian/Documents/GitHub/examen-twj-santacruzcristian/Frontend/src/environment.js.map
 
 /***/ }),
 
@@ -551,7 +552,7 @@ module.exports = "<h1 align=\"center\">{{title}} del Celular{{this._parametros.i
 /***/ 516:
 /***/ (function(module, exports) {
 
-module.exports = "<!DOCTYPE html>\n<html>\n<head>\n  <title><%=typeof title == 'undefined' ? '' : title%></title>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\">\n</head>\n\n<body>\n<nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\"\n              data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span>MENÚ</span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">Celulares App</a>\n    </div>\n\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n        <li><a [routerLink]=\"['/home']\">Inicio</a></li>\n        <li><a [routerLink]=\"['/celular']\">Crear Celulares</a></li>\n      </ul>\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n<div class=\"container\">\n</div>\n\n</body>\n</html>\n\n<router-outlet></router-outlet>\n"
+module.exports = "<!DOCTYPE html>\n<html>\n<head>\n  <title><%=typeof title == 'undefined' ? '' : title%></title>\n\n\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\">\n\n</head>\n\n<body>\n<nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\"\n              data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span>MENÚ</span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">Celular App</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n        <li><a [routerLink]=\"['/home']\">Inicio</a></li>\n        <li><a [routerLink]=\"['/celular']\">Listar y Crear Celulares</a></li>\n        <!--<li><a [routerLink]=\"['/bodega','*','item']\">Listar Items</a></li>-->\n\n      </ul>\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n<div class=\"container\">\n\n</div>\n\n\n</body>\n</html>\n\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
@@ -565,7 +566,7 @@ module.exports = "<h1 align=\"center\">{{title}}</h1>\n\n<div class=\"container\
 /***/ 518:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Bienvenidos</h1>\n\n  <div row>\n    <div class=\"jumbotron col-sm-5\">\n      <h1>Celulares</h1>\n      <p>Registrar Celulares</p>\n      <p><a class=\"btn btn-primary btn-lg\" [routerLink]=\"['/celular']\" role=\"button\">Crear Celulares</a>  </p>\n    </div>\n    <div class=\"col-sm-1\"> </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h1>Bienvenidos</h1>\n\n<div row>\n  <div class=\"jumbotron col-sm-5\">\n    <h1>Celulares</h1>\n    <p>Registrar Celulares</p>\n    <p><a class=\"btn btn-primary btn-lg\" [routerLink]=\"['/celular']\" role=\"button\">Listar y Crear Celulares</a>  </p>\n  </div>\n  <div class=\"col-sm-1\"> </div>\n\n  <div class=\"jumbotron col-sm-5\">\n    <h1>Aplicaciones</h1>\n    <p>Para registrar o listar Items, use el botón \"Listar y Crear Celulares\"  </p>\n    <h4>Dentro de cada bodega podrá crear o listar Aplicaciones.</h4>\n  </div>\n\n</div>\n</div>\n"
 
 /***/ }),
 

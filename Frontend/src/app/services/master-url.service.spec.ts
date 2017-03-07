@@ -1,15 +1,14 @@
 import { TestBed, inject } from '@angular/core/testing';
+import { MasterURlService } from './master-url.service';
 
-import { MasterUrlService } from './master-url.service';
-
-describe('MasterUrlService', () => {
+describe('MasterURlService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MasterUrlService]
+      providers: [MasterURlService]
     });
   });
 
-  it('should ...', inject([MasterUrlService], (service: MasterUrlService) => {
+  it('should ...', inject([MasterURlService], (service: MasterURlService) => {
     expect(service).toBeTruthy();
   }));
 });

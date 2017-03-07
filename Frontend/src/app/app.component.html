@@ -1,8 +1,33 @@
-<nav class="navbar navbar-inverse" >
-  <ul class="nav navbar-nav">
-    <li><a class="navbar-brand" [routerLink]="['/home']">Home</a></li>
-    <li><a class="navbar-brand" [routerLink]="['/celulares']">Celular</a></li>
-    <li><a class="navbar-brand" [routerLink]="['/celulares','1','aplicacion']">Aplicacion</a></li>
-  </ul>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%=typeof title == 'undefined' ? '' : title%></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span>MENÚ</span>
+      </button>
+      <a class="navbar-brand" href="#">Celulares App</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a [routerLink]="['/home']">Inicio</a></li>
+        <li><a [routerLink]="['/celular']">Crear Celulares</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
+<div class="container">
+</div>
+
+</body>
+</html>
+
 <router-outlet></router-outlet>
